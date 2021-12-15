@@ -40,7 +40,7 @@ pub enum BlogType {
 pub fn parse_blogs(doc: &Html) -> Vec<BlogGroup> {
     use std::ops::Deref;
 
-    let selector_updates = Selector::parse("h1#updates-from-rust-community").unwrap();
+    let selector_updates = Selector::parse("h2#updates-from-rust-community").unwrap();
 
     let selector_li = Selector::parse("li").unwrap();
     let selector_a = Selector::parse("a").unwrap();
@@ -53,10 +53,10 @@ pub fn parse_blogs(doc: &Html) -> Vec<BlogGroup> {
         for sibling in h1
             .next_siblings()
             .flat_map(ElementRef::wrap)
-            .take_while(|sib| sib.value().name() != "h1")
+            .take_while(|sib| sib.value().name() != "h2")
         {
             match sibling.value().name() {
-                "h2" | "h3" | "h4" | "h5" | "h6" => {
+                "h3" | "h4" | "h5" | "h6" => {
                     group_title = Some(sibling.text().collect::<String>());
                 }
                 "ul" => {

@@ -47,8 +47,7 @@ async fn run() -> Result<(), reqwest::Error> {
 }
 
 fn main() {
-    // важно - трябва да бъде v0.2 tokio runtime
-    let mut runtime = Runtime::new().unwrap();
+    let runtime = Runtime::new().unwrap();
 
     match runtime.block_on(run()) {
         Ok(()) => (),
